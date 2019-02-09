@@ -1,0 +1,35 @@
+{
+  "name": "wyraz",
+  "version": "1.0.0",
+  "description": "Small web app using NOH.js library.",
+  "main": "wyraz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/langara/wyraz.git"
+  },
+  "keywords": [
+    "wyraz",
+    "word",
+    "js",
+    "app",
+    "web",
+    "page",
+    "small",
+    "example",
+    "crossword",
+    "rebus",
+    "puzzle"
+  ],
+  "author": "Marek Langiewicz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/langara/wyraz/issues"
+  },
+  "homepage": "https://github.com/langara/wyraz#readme",
+  "dependencies": {
+    "noh.js": "^1.0.0"
+  }
+}
