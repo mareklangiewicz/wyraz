@@ -4,7 +4,8 @@
   "description": "Small web app using NOH.js library.",
   "main": "wyraz.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "start": "webpack-dev-server --entry ./src/wyraz.js --output-filename ./dist/wyraz.js --open-page ./wyraz.html"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,14 @@
   },
   "homepage": "https://github.com/langara/wyraz#readme",
   "dependencies": {
+    "jquery": "^3.3.1",
     "noh.js": "^1.0.0"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }
