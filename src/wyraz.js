@@ -1,21 +1,20 @@
 // [ vim: set tabstop=2 shiftwidth=2 expandtab : ]
 
-require('noh.js');
+require('./wyraz.css');
+var $ = require('jquery');
+var noh = require('noh.js').noh;
 
 var words = [];
 
-function init() {
+function wyraz_init() {
+    var container = $('#wyraz');
+    if(container.length === 0)
+        return;
   var body = wyraz_body();
-  body.attachToDOM(document.body);
+  body.attachToDOM(container[0]);
 }
 
-
-$(document).ready(init);
-
-
-
-
-
+$(wyraz_init);
 
 // User commands:
 
@@ -121,7 +120,7 @@ function anagram(arr1, arr2) {
     for(var j = 0; j < arr2.length; ++j)
       if(chk_anagram(arr1[i], arr2[j]))
         r.push(arr2[j]);
-    if(r.length == 0) {
+    if(r.length === 0) {
       console.log('PL: Nie znalazłem żadnych anagramów "' + arr1[i] + '".');
       console.log('EN: No anagrams of "' + arr1[i] + '" found.');
     }
@@ -148,7 +147,7 @@ function metagram(arr1, arr2) {
     for(var j = 0; j < arr2.length; ++j)
       if(chk_metagram(arr1[i], arr2[j]))
         r.push(arr2[j]);
-    if(r.length == 0) {
+    if(r.length === 0) {
       console.log('PL: Nie znalazłem żadnych metagramów "' + arr1[i] + '".');
       console.log('EN: No metagrams of "' + arr1[i] + '" found.');
     }
@@ -174,7 +173,7 @@ function short(arr1, arr2) {
     for(var j = 0; j < arr2.length; ++j)
       if(chk_short(arr1[i], arr2[j]))
         r.push(arr2[j]);
-    if(r.length == 0) {
+    if(r.length === 0) {
       console.log('PL: Nie znalazłem żadnych skrótek "' + arr1[i] + '".');
       console.log('EN: No shorts of "' + arr1[i] + '" found.');
     }
@@ -201,7 +200,7 @@ function carousel(arr1, arr2) {
     for(var j = 0; j < arr2.length; ++j)
       if(chk_carousel(arr1[i], arr2[j]))
         r.push(arr2[j]);
-    if(r.length == 0) {
+    if(r.length === 0) {
       console.log('PL: Nie znalazłem żadnych karuzel "' + arr1[i] + '".');
       console.log('EN: No carousels of "' + arr1[i] + '" found.');
     }
@@ -228,7 +227,7 @@ function drawer(arr1, arr2) {
     for(var j = 0; j < arr2.length; ++j)
       if(chk_drawer(arr1[i], arr2[j]))
         r.push(arr2[j]);
-    if(r.length == 0) {
+    if(r.length === 0) {
       console.log('PL: Nie znalazłem żadnych szuflad "' + arr1[i] + '".');
       console.log('EN: No drawers of "' + arr1[i] + '" found.');
     }
@@ -250,7 +249,7 @@ function find(arr1, arr2) {
   var res = []; // all results will be here
   for(var i = 0; i < arr1.length; ++i)
     for(var j = 0; j < arr2.length; ++j)
-      if(arr1[i] == arr2[j]) {
+      if(arr1[i] === arr2[j]) {
         res.push(arr2[j]);
         break;
       }
@@ -264,7 +263,7 @@ function rev(arr1, arr2) {
   };
 
   var res = [];
-  
+
   if(!(arr1 instanceof Array))
     arr1 = [arr1];
 
@@ -286,7 +285,7 @@ function rev(arr1, arr2) {
     var r = find(rev_(arr1[i]), arr2);
 
     if(arr2.length > 1) { // We do not pollute the console if the dictionary is just one word.
-      if(r.length == 0) {
+      if(r.length === 0) {
         console.log('PL: Nie znalazłem odwrotności "' + arr1[i] + '".');
         console.log('EN: No reverse of "' + arr1[i] + '" found.');
       }
@@ -308,7 +307,7 @@ function wyraz(arr1, arr2) {
   var res = [];
   var r = []; // result of single operation.
   r = anagram(arr1, arr2); console.log(r); res = res.concat(r);
-  r = metagram(arr1, arr2); console.log(r); res = res.concat(r); 
+  r = metagram(arr1, arr2); console.log(r); res = res.concat(r);
   r = short(arr1, arr2); console.log(r); res = res.concat(r);
   r = rev(arr1, arr2); console.log(r); res = res.concat(r);
   r = carousel(arr1, arr2); console.log(r); res = res.concat(r);
@@ -346,10 +345,10 @@ function load(dictname) {
         console.warn(arguments);
       });
       load.interval_ = setInterval (function () {
-        var total = load.total_ !== undefined ? load.total_ : 0; 
+        var total = load.total_ !== undefined ? load.total_ : 0;
         var loaded = load.loaded_ !== undefined ? load.loaded_ : 0;
         if((total > 0) && (loaded > 0))
-          console.log(Math.round((loaded/total) * 100) + "%")
+          console.log(Math.round((loaded/total) * 100) + "%");
         else if(loaded > 0)
           console.log(Math.round(loaded/1024) + " KB");
         else
@@ -367,29 +366,29 @@ function load(dictname) {
     error: function() {
       console.error(arguments);
     }
-  }); 
+  });
 }
 
 
 
 function chk_anagram(text1, text2) {
-  if(text1 == text2)
+  if(text1 === text2)
     return false; //Lets say that a word is not an anagram of itself.
   for(var i = 0; i < text1.length; ++i) {
     var j = text2.indexOf(text1[i]);
-    if(j == -1)
+    if(j === -1)
       return false;
     else
       text2 = '' + text2.substring(0, j) + text2.substring(j+1);
   }
-  return text2.length == 0;
+  return text2.length === 0;
 }
 
 function chk_metagram(text1, text2) {
-  if(text1.length != text2.length)
+  if(text1.length !== text2.length)
     return false;
   for(var i = 0; i < text1.length; ++i)
-    if( (text1.substring(0, i) == text2.substring(0, i)) && (text1.substring(i+1) == text2.substring(i+1)) )
+    if( (text1.substring(0, i) === text2.substring(0, i)) && (text1.substring(i+1) === text2.substring(i+1)) )
       return true;
   return false;
 }
@@ -397,9 +396,9 @@ function chk_metagram(text1, text2) {
 function chk_short(text1, text2) {
   var j = 0;
   for(var i = 0; i < text1.length; ++i) {
-    if(text1[i] == text2[j]) {
+    if(text1[i] === text2[j]) {
       j++;
-      if(j == text2.length)
+      if(j === text2.length)
         return true;
     }
   }
@@ -411,7 +410,7 @@ function chk_carousel(text1, text2) {
   for(var offset = 0; offset < text1.length; ++offset) {
     var ok = true;
     for(var i = 0; i < text2.length; ++i)
-      if(text1[(offset+i) % text1.length] != text2[i]) {
+      if(text1[(offset+i) % text1.length] !== text2[i]) {
         ok = false;
         break;
       }
@@ -423,7 +422,7 @@ function chk_carousel(text1, text2) {
 
 
 function chk_drawer(text1, text2) {
-  return text2.indexOf(text1) != -1;
+  return text2.indexOf(text1) !== -1;
 }
 
 
@@ -460,6 +459,8 @@ function verbose(logger) {
 
 
 function wyraz_body() {
+    var b = noh.h4("BBBBBB");
+    return b;
   var warning = size_warning();
   var cmdline = noh.cmdline(40).addclass("pretty");
   var logger = noh.log.reel(35, 240000).addclass("pretty");

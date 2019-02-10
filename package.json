@@ -32,9 +32,10 @@
   "homepage": "https://github.com/langara/wyraz#readme",
   "dependencies": {
     "jquery": "^3.3.1",
-    "noh.js": "^1.0.0"
+    "noh.js": "^1.0.1"
   },
   "devDependencies": {
+    "ajv": "^6.9.1",
     "css-loader": "^2.1.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.3",

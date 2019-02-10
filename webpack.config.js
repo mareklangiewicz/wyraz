@@ -16,4 +16,4 @@ var config = {
     module: { rules: rules }
 };
 
-module.exports = [config];
+module.exports = config;
