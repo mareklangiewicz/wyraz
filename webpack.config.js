@@ -12,7 +12,7 @@ var rules = [
 var config = {
     mode: 'development',
     entry: './src/wyraz.js',
-    output: { path: distpath, filename: 'wyraz.js' },
+    output: { path: distpath, filename: 'wyraz.js', library: 'wyraz', libraryTarget: 'umd' },
     module: { rules: rules }
 };
 

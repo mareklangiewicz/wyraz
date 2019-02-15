@@ -2,19 +2,44 @@
 
 require('./wyraz.css');
 var $ = require('jquery');
-var noh = require('noh.js').noh;
-
-var words = [];
+var noh = require('noh.js');
 
 function wyraz_init() {
     var container = $('#wyraz');
     if(container.length === 0)
         return;
-  var body = wyraz_body();
-  body.attachToDOM(container[0]);
+    wyraz_attach_body(container[0]);
+    wyraz_attach_functions(window);
 }
 
 $(wyraz_init);
+
+function wyraz_attach_body(root) {
+    var body = wyraz_body();
+    body.attachToDOM(root);
+}
+
+exports.attach_body = wyraz_attach_body;
+
+function wyraz_attach_functions(object) {
+    object.words = [];
+    object.help = help;
+    object.pomoc = pomoc;
+    object.advanced = advanced;
+    object.zaawansowany = zaawansowany;
+    object.anagram = anagram;
+    object.metagram = metagram;
+    object.short = short;
+    object.carousel = carousel;
+    object.drawer = drawer;
+    object.find = find;
+    object.rev = rev;
+    object.rnd = rnd;
+    object.wyraz = wyraz;
+    object.load = load;
+}
+
+exports.attach_functions = wyraz_attach_functions;
 
 // User commands:
 
@@ -37,6 +62,8 @@ function help() {
     'enter: advanced() to see advanced help.'
   ], 200);
 }
+
+exports.help = help;
 
 function advanced() {
   slow_log([
@@ -61,6 +88,8 @@ function advanced() {
   ], 200);
 }
 
+exports.advanced = advanced;
+
 function pomoc() {
   slow_log([
     'Pomoc aplikacji Wyraz:',
@@ -80,6 +109,8 @@ function pomoc() {
     'wpisz: zaawansowany() aby zobaczyć pomoc dla zaawansowanych.'
   ], 200);
 }
+
+exports.pomoc = pomoc;
 
 function zaawansowany() {
   slow_log([
@@ -105,7 +136,7 @@ function zaawansowany() {
   ], 200);
 }
 
-
+exports.zaawansowany = zaawansowany;
 
 function anagram(arr1, arr2) {
   if(!(arr1 instanceof Array))
@@ -133,6 +164,7 @@ function anagram(arr1, arr2) {
   return res;
 }
 
+exports.anagram = anagram;
 
 function metagram(arr1, arr2) {
   if(!(arr1 instanceof Array))
@@ -160,6 +192,8 @@ function metagram(arr1, arr2) {
   return res;
 }
 
+exports.metagram = metagram;
+
 function short(arr1, arr2) {
   if(!(arr1 instanceof Array))
     arr1 = [arr1];
@@ -186,6 +220,7 @@ function short(arr1, arr2) {
   return res;
 }
 
+exports.short = short;
 
 function carousel(arr1, arr2) {
   if(!(arr1 instanceof Array))
@@ -213,6 +248,7 @@ function carousel(arr1, arr2) {
   return res;
 }
 
+exports.carousel = carousel;
 
 function drawer(arr1, arr2) {
   if(!(arr1 instanceof Array))
@@ -240,6 +276,7 @@ function drawer(arr1, arr2) {
   return res;
 }
 
+exports.drawer = drawer;
 
 function find(arr1, arr2) {
   if(!(arr1 instanceof Array))
@@ -255,6 +292,8 @@ function find(arr1, arr2) {
       }
   return res;
 }
+
+exports.find = find;
 
 function rev(arr1, arr2) {
 
@@ -300,8 +339,11 @@ function rev(arr1, arr2) {
   return res;
 }
 
+exports.rev = rev;
+
 function rnd(min, max) { return Math.round(min + Math.random() * (max-min+1)); }
 
+exports.rnd = rnd;
 
 function wyraz(arr1, arr2) {
   var res = [];
@@ -315,6 +357,8 @@ function wyraz(arr1, arr2) {
   r = drawer(arr1, arr2); console.log(r); res = res.concat(r);
   return res;
 }
+
+exports.wyraz = wyraz;
 
 function load(dictname) {
   if(load.interval_) {
@@ -369,7 +413,7 @@ function load(dictname) {
   });
 }
 
-
+exports.load = load;
 
 function chk_anagram(text1, text2) {
   if(text1 === text2)
@@ -459,8 +503,6 @@ function verbose(logger) {
 
 
 function wyraz_body() {
-    var b = noh.h4("BBBBBB");
-    return b;
   var warning = size_warning();
   var cmdline = noh.cmdline(40).addclass("pretty");
   var logger = noh.log.reel(35, 240000).addclass("pretty");
@@ -497,6 +539,8 @@ function wyraz_body() {
   window.setTimeout(function() {cmdline[0].$.focus();}, 200);
   return body;
 }
+
+exports.body = wyraz_body;
 
 function size_warning() {
   if ( ($(window).width() < 600) || ($(window).height() < 700) )
