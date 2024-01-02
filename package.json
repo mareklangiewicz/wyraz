@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/langara/wyraz.git"
+    "url": "git+https://github.com/mareklangiewicz/wyraz.git"
   },
   "keywords": [
     "wyraz",
@@ -27,9 +27,9 @@
   "author": "Marek Langiewicz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/langara/wyraz/issues"
+    "url": "https://github.com/mareklangiewicz/wyraz/issues"
   },
-  "homepage": "https://github.com/langara/wyraz#readme",
+  "homepage": "https://github.com/mareklangiewicz/wyraz#readme",
   "dependencies": {
     "jquery": "^3.3.1",
     "noh.js": "^1.0.3"

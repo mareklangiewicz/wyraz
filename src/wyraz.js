@@ -520,7 +520,7 @@ function wyraz_body() {
   var body = noh.div(
     noh.p(
       noh.fancy(noh.h1("Wyraz")),
-      "Small web app written with the ", noh.a({href:"https://github.com/langara/noh"}, "NOH"), " library", noh.br(),
+      "Small web app written with the ", noh.a({href:"https://github.com/mareklangiewicz/noh"}, "NOH"), " library", noh.br(),
       noh.i(warning).css("font-size", "small")
     ).css("margin", 20),
     overlay
